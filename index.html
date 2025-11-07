@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yankee AI - Smart Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0a1930, #1e3a8a);
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {background: #111827; padding: 15px 0;}
+    header h1 {margin: 0; font-size: 1.8em; color: #60a5fa;}
+    nav a {color: #93c5fd; margin: 0 10px; text-decoration: none; font-weight: bold;}
+    nav a:hover {color: #fff;}
+    .chat-container {background: #1e293b; width: 90%; max-width: 500px; margin: 40px auto; padding: 20px; border-radius: 12px;}
+    .chat-box {height: 400px; overflow-y: auto; background: #0f172a; border-radius: 8px; padding: 10px;}
+    .user-msg, .bot-msg {margin: 10px 0; padding: 8px 12px; border-radius: 10px; display: inline-block; max-width: 80%;}
+    .user-msg {background: #2563eb; color: white; float: right; clear: both;}
+    .bot-msg {background: #374151; color: #e2e8f0; float: left; clear: both;}
+    .input-area {display: flex; margin-top: 15px;}
+    .input-area input {flex: 1; padding: 10px; border: none; border-radius: 8px 0 0 8px; outline: none;}
+    .input-area button {background: #2563eb; color: white; border: none; border-radius: 0 8px 8px 0; padding: 10px 15px;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🤖 Yankee AI</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Yankee AI | Powered by YankeeHub</footer>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    function addMessage(msg, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add(sender === 'user' ? 'user-msg' : 'bot-msg');
+      msgDiv.textContent = msg;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      userInput.value = '';
+      setTimeout(() => {
+        let reply;
+        if (text.toLowerCase().includes('hello')) reply = 'Hi there! I’m Yankee AI.';
+        else if (text.toLowerCase().includes('usa')) reply = 'The United States is always trending! 🇺🇸';
+        else reply = 'Try asking me about USA news, politics, or sports 🗞️';
+        addMessage(reply, 'bot');
+      }, 800);
+    }
+  </script>
+</body>
+</html>
